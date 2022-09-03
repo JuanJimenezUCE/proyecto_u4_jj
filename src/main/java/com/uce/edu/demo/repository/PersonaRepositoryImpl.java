@@ -1,7 +1,10 @@
 package com.uce.edu.demo.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -39,6 +42,14 @@ public class PersonaRepositoryImpl implements IPersonaRepository {
 
 		Persona persona = this.buscarPorId(id);
 		this.entityManager.remove(persona);
+	}
+
+	@Override
+	public List<Persona> buscarTodos() {
+		// TODO Auto-generated method stub
+		TypedQuery<Persona> myQuery = this.entityManager.createQuery("SELECT p FROM Persona p",Persona.class);
+		
+		return myQuery.getResultList();
 	}
 
 
